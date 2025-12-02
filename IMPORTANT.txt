@@ -1,0 +1,4 @@
+Vous pouvez consulter notre projet directement sur GitHub :
+https://github.com/EkiaND/DED/
+
+Pour voir les contributions de chacun plus en détail, rendez-vous dans l’onglet "Insights" > "Contributors".

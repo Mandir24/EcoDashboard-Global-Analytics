@@ -1,0 +1,582 @@
+/* Styles principaux */
+body {
+    background-color: #4e8ef7;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Style pour le header */
+#main-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrage horizontal */
+    justify-content: center; /* Centrage vertical */
+    padding: 30px 0;
+    background: linear-gradient(to left, #222, #444);
+    border-bottom: 5px solid #4e8ef7;
+    position: relative;
+}
+
+/* Header top avec logos fixés aux extrémités réelles de la page */
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw; /* pleine largeur de la fenêtre */
+    padding: 0 50px; /* petit padding interne */
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Logos */
+#main-header img {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Effet au survol des logos */
+#main-header img:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 10px #4e8ef7);
+}
+
+#main-header h1 {
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: #e0e0e0;
+    text-align: center;
+    margin: 0;
+    letter-spacing: 0.8px;
+    font-family: 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+    opacity: 0.95;
+    line-height: 1.2;
+    animation: fadeInSlide 0.6s ease-out;
+    width: 100%; /* Assurez-vous que le h1 prend toute la largeur */
+}
+
+/* Auteurs en bas */
+#main-header .auteurs {
+    margin-top: 20px;
+    text-align: center;
+    color: #cccccc;
+    font-size: 1rem;
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+/* Style pour la navigation */
+nav {
+    background-color: #4e8ef7;
+    height: 3cm;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+li {
+    flex-grow: 1;
+    text-align: center;
+    margin: 5px;
+}
+
+li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    display: block;
+    background-color: #4e8ef7;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 2px solid white;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: 0.3s;
+    box-sizing: border-box;
+    transform-origin: center;
+}
+
+li a:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+/* Styles pour le tableau des graphiques */
+#graphTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 20px;
+    margin: 20px 0;
+    table-layout: fixed;
+}
+
+.graph-cell {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    vertical-align: middle;
+    text-align: center;
+    height: 400px;
+    width: 45%;
+    box-sizing: border-box;
+}
+
+.graph-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.graph-container canvas {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 90%;
+    box-sizing: border-box;
+}
+
+/* Styles pour la carte interactive */
+#map-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #333;
+    border-radius: 10px;
+    position: relative;
+}
+
+#mapContainer svg {
+    width: 100%;
+    height: 100%;
+}
+
+#indicatorSelect {
+    position: absolute;
+    top: -2px;
+    left: 10px;
+    z-index: 10;
+    font-size: 1rem;
+    width: auto;
+    max-width: 175px;
+    box-sizing: border-box;
+}
+
+/* Style par défaut pour les régions de la carte */
+.region {
+    fill: #d3d3d3 !important;
+    stroke: #333 !important;
+    stroke-width: 0.5px !important;
+    transition: fill 0.3s ease;
+}
+
+.region:hover {
+    fill: #ffa500 !important;
+    cursor: pointer;
+}
+
+.region.selected {
+    fill: #ff4500 !important;
+    stroke: #000 !important;
+    stroke-width: 1px !important;
+}
+
+/* Styles pour le formulaire de sélection */
+#controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#controls label {
+    color: #333;
+    font-weight: bold;
+}
+
+#controls select,
+#controls input,
+#controls button {
+    padding: 5px 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#controls button {
+    background-color: #4e8ef7;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#controls button:hover {
+    background-color: #0056b3;
+}
+
+/* Style pour les boutons selections */
+#graphTable td[rowspan="5"] {
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    vertical-align: top;
+    width: 260px;
+}
+
+#graphTable label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+}
+
+#graphTable select {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #fdfdfd;
+    transition: border-color 0.3s;
+}
+
+#graphTable select:focus {
+    border-color: #1976d2;
+    outline: none;
+}
+
+#bouton_comparer {
+    display: block;
+    width: 40%;
+    padding: 10px;
+    background-color: #1976d2;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#bouton_comparer:hover {
+    background-color: #145ca1;
+}
+
+#erreur {
+    margin-top: 12px;
+    color: red;
+    font-size: 13px;
+}
+
+/* Style pour les boutons selections */
+#graphTable td[rowspan="5"] {
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    vertical-align: top;
+    width: 260px;
+}
+
+/* 🏷️ Labels avec espace et style propre */
+#graphTable label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* 🔽 Selects stylés */
+#graphTable select {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #fdfdfd;
+    transition: border-color 0.3s;
+}
+
+#graphTable select:focus {
+    border-color: #1976d2;
+    outline: none;
+}
+
+/* 🔘 Bouton "Comparer" moderne */
+#bouton_comparer {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #1976d2;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#bouton_comparer:hover {
+    background-color: #145ca1;
+}
+
+/* ⚠️ Message d’erreur rouge et espacé */
+#erreur {
+    margin-top: 12px;
+    color: red;
+    font-size: 13px;
+}
+
+/* Styles pour le tableau des indicateurs */
+#infoPays table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#infoPays table thead {
+    background-color: #4e8ef7;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+#infoPays table th,
+#infoPays table td {
+    padding: 15px;
+    text-align: center;
+    font-size: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+#infoPays table th {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#infoPays table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#infoPays table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+#infoPays table td {
+    color: #333;
+    font-weight: 500;
+}
+
+#infoPays table td[data-label]::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: none;
+    margin-right: 10px;
+    color: #4e8ef7;
+}
+
+/* Responsive design pour le tableau */
+@media (max-width: 768px) {
+    #infoPays table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    #infoPays table th,
+    #infoPays table td {
+        text-align: left;
+        padding: 10px;
+    }
+
+    #infoPays table td[data-label]::before {
+        display: inline-block;
+    }
+}
+
+/* Style pour les KPI dans comparaison_pays.php */
+
+.kpi-box {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.kpi-box:hover {
+    transform: translateY(-5px);
+}
+
+.kpi-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.kpi-box p {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0077cc;
+    margin: 0;
+}
+
+.kpi-box span {
+    font-size: 2.5rem;
+    color: #222;
+}
+/* Style pour le footer */
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrage horizontal */
+    justify-content: center; /* Centrage vertical */
+    background: linear-gradient(to left, #222, #444);
+    color: white;
+    padding: 30px 0;
+    width: 100%;
+    border-top: 5px solid #4e8ef7;
+    position: relative;
+    bottom: 0;
+    font-size: 14px;
+}
+
+/* Footer table */
+.footer-table {
+    width: 100%;
+    text-align: center;
+    table-layout: fixed;
+}
+
+/* Footer sections */
+.footer-left,
+.footer-center,
+.footer-right {
+    padding: 5px 10px;
+    vertical-align: middle;
+}
+
+/* Alignement à gauche, centré, et à droite */
+.footer-left {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.footer-center {
+    text-align: center;
+    font-weight: bold;
+}
+
+.footer-right {
+    text-align: right;
+    padding-right: 20px;
+}
+
+/* Liens dans le footer */
+footer a {
+    color: white;
+    text-decoration: none;
+    transition: text-decoration 0.3s;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Animation pour l'image du footer */
+.footer-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.footer-logo:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 10px #4e8ef7);
+}
+
+/* Style pour le bouton retour */
+#backButton {
+    position: absolute;
+    top: -2px;
+    right: 10px;
+    padding: 10px 15px;
+    background-color: #4e8ef7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    z-index: 1000;
+    transition: background-color 0.3s;
+}
+
+#backButton:hover {
+    background-color: #0056b3;
+}
+
+/* Style pour les valeurs indisponibles */
+.valeur-indisponible {
+    color: red;
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* Style pour les cellules contenant des valeurs indisponibles */
+.cell-indisponible {
+    color: red !important;
+    font-weight: bold !important;
+    font-style: italic !important;
+    background-color: #ffe6e6 !important; /* Optionnel : fond rouge clair pour plus de visibilité */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
