@@ -21,9 +21,9 @@
 <body>
 
     <?php
-    include('./views/partials/header.php'); // Inclusion du header
-    include('./views/partials/selecteurs.php'); // Inclusion du sélecteur
-    include('./views/partials/footer.php'); // Inclusion du footer
+    include('../views/partials/header.php'); // Inclusion du header
+    include('../views/partials/selecteurs.php'); // Inclusion du sélecteur
+    include('../views/partials/footer.php'); // Inclusion du footer
     ?>
     
 
