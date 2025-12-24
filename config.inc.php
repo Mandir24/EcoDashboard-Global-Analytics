@@ -23,24 +23,20 @@
  * - Utilise `mysqli_sql_exception` pour signaler les erreurs SQL.
  * - Arrête l'exécution en cas d'erreur de connexion.
  */
+function getBDD() {
+    // Render fournit ces informations via des variables d'environnement
+    $db_host = getenv('DB_HOST') ?: "localhost";
+    $db_name = getenv('DB_NAME') ?: "economie_mondiale";
+    $db_user = getenv('DB_USER') ?: "root"; 
+    $db_pass = getenv('DB_PASS') ?: "root"; 
 
- function getBDD() {
-    $db_host = "localhost";
-    $db_name = "economie_mondiale";
-    $db_user = "root"; 
-    $db_pass = "root"; // sur mac OS, doit normalement etre renseigné
-
-    // Activer le mode d'exception pour mysqli
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-    // Établir la connexion à la base de données
-    $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-
-    // Vérifier les erreurs de connexion
-    if (!$conn) {
-        die("Erreur de connexion à la base de données : " . mysqli_connect_error());
+    try {
+        $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+        return $conn;
+    } catch (Exception $e) {
+        die("Erreur de connexion à la base de données : " . $e->getMessage());
     }
-
-    return $conn;
 }
 ?>
