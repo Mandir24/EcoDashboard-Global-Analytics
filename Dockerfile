@@ -1,20 +1,25 @@
 FROM php:8.2-apache
 
-# Installation des extensions nécessaires pour SQLite (si utilisé)
-RUN apt-get update && apt-get install -y libsqlite3-dev && docker-php-ext-install pdo pdo_sqlite
+# 1. Installation des dépendances système et PHP
+RUN apt-get update && apt-get install -y \
+    libsqlite3-dev \
+    && docker-php-ext-install pdo pdo_sqlite pdo_mysql
 
-# Activer le module de réécriture Apache (pour les routes propres)
+# 2. Activation du module rewrite pour les routes propres (.htaccess)
 RUN a2enmod rewrite
 
-# Copier les fichiers du projet dans le serveur
-COPY . /var/www/html/
+# 3. Définition du dossier de travail
+WORKDIR /var/www/html
 
-# Configurer Apache pour pointer vers le dossier public
+# 4. Copie de tout le projet
+COPY . .
+
+# 5. Configuration d'Apache pour pointer sur le dossier 'public'
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-# Donner les permissions
-RUN chown -R www-data:www-data /var/www/html
+# 6. Correction des permissions pour l'accès aux fichiers
+RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
 EXPOSE 80
